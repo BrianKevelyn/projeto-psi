@@ -1,3 +1,5 @@
+-- Modelo Físico:
+
 -- Tabela: usuarios
 CREATE TABLE tb_usuarios (
     usu_id INT AUTO_INCREMENT PRIMARY KEY,
