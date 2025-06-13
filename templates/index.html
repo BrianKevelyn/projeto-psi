@@ -31,11 +31,7 @@
         <li class="nav-item"><a class="nav-link" href="#">Perfil</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
       </ul>
-
-      <div class="d-flex align-items-center">
-        <button class="btn btn-outline-light me-2">Login</button>
-        <button class="btn btn-light text-primary">Registrar</button>
-      </div>
+    <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-light">Logout</a>
     </div>
   </div>
 </nav>
