@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}Minha Biblioteca{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='flash.css') }}">
+
+</head>
+<body>
+
+  <div class="flash-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash-message {{ category }}">
+            {{ message }}
+            <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+  {% block content %}{% endblock %}
+
+  <script>
+  setTimeout(() => {
+    const flashes = document.querySelectorAll('.flash-message');
+    flashes.forEach(flash => {
+      flash.style.transition = 'opacity 0.5s ease';
+      flash.style.opacity = '0';
+      setTimeout(() => flash.remove(), 500);
+    });
+  }, 3000);
+</script>
+
+</body>
+</html>

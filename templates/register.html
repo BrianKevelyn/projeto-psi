@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Registrar - Minha Biblioteca{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
+
+  <h2>Registrar Usuário</h2>
+  <form method="POST" action="{{ url_for('auth.register') }}">
+    <div>
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required>
+    </div>
+    <div>
+      <label for="matricula">Matrícula:</label>
+      <input type="text" id="matricula" name="matricula" required>
+    </div>
+    <div>
+      <label for="telefone">Telefone:</label>
+      <input type="text" id="telefone" name="telefone">
+    </div>
+    <div>
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div>
+      <label for="tipo">Tipo:</label>
+      <select id="tipo" name="tipo" required>
+        <option value="">Selecione...</option>
+        <option value="cliente">Cliente</option>
+        <option value="bibliotecario">Bibliotecário</option>
+      </select>
+    </div>
+    <div>
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" name="senha" required>
+    </div>
+    <button type="submit">Registrar</button>
+  </form>
+  <p>Já tem conta? <a href="{{ url_for('auth.login') }}">Faça login</a></p>
+{% endblock %}

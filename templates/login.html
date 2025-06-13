@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Minha Biblioteca{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+  <h2>Login</h2>
+  <form method="POST" action="{{ url_for('auth.login') }}">
+    <div>
+      <label for="matricula">Matrícula:</label>
+      <input type="text" id="matricula" name="matricula" required>
+    </div>
+    <div>
+      <label for="senha">Senha:</label>
+      <input type="password" id="senha" name="senha" required>
+    </div>
+    <button type="submit">Entrar</button>
+  </form>
+  <p>Não tem conta? <a href="{{ url_for('auth.register') }}">Cadastre-se aqui</a></p>
+{% endblock %}
