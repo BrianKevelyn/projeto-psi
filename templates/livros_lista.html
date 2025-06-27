@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Lista de Livros</h2>
+
+  {% for livro in livros %}
+  <p>Título: {{ livro.liv_titulo }}, Autor: {{ livro.liv_autor }}</p>
+  {% else %}
+  <p>Não há livros cadastrados.</p>
+  {% endfor %}
+
+  <a href="{{ url_for('livros.adicionar_livro') }}">Adicionar novo livro</a>
+  <br>
+  <a href="{{ url_for('main.index') }}">Voltar para Início</a>
+{% endblock %}

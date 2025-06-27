@@ -7,3 +7,8 @@ main_bp = Blueprint('main', __name__)
 @login_required
 def index():
     return render_template('index.html', nome=current_user.usu_nome)
+
+@main_bp.route('/perfil')
+@login_required
+def perfil():
+    return render_template('perfil.html', nome=current_user.usu_nome)

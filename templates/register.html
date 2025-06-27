@@ -1,9 +1,28 @@
-{% extends 'base.html' %}
 
-{% block title %}Registrar - Minha Biblioteca{% endblock %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}Minha Biblioteca{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='flash.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
 
-{% block content %}
 
+
+  <div class="flash-container">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="flash-message {{ category }}">
+            {{ message }}
+            <button class="close-btn" onclick="this.parentElement.style.display='none';">&times;</button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
 <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
 
   <h2>Registrar Usuário</h2>
@@ -39,4 +58,16 @@
     <button type="submit">Registrar</button>
   </form>
   <p>Já tem conta? <a href="{{ url_for('auth.login') }}">Faça login</a></p>
-{% endblock %}
+  <script>
+  setTimeout(() => {
+    const flashes = document.querySelectorAll('.flash-message');
+    flashes.forEach(flash => {
+      flash.style.transition = 'opacity 0.5s ease';
+      flash.style.opacity = '0';
+      setTimeout(() => flash.remove(), 500);
+    });
+  }, 3000);
+</script>
+
+</body>
+</html>

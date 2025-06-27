@@ -5,6 +5,7 @@ class Livro(db.Model):
 
     liv_id = db.Column(db.Integer, primary_key=True)
     liv_titulo = db.Column(db.String(200), nullable=False)
+    liv_descricao = db.Column(db.String(450), nullable=False)
     liv_editora = db.Column(db.String(100))
     liv_ano = db.Column(db.Integer)
     liv_autor = db.Column(db.String(100))

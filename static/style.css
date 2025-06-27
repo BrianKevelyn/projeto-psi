@@ -1,137 +1,194 @@
-/* Reset básico e corpo */
+/* Reset básico do body */
 body {
-    background-color: #f8f9fa;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    color: #343a40;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #343a40;
 }
 
-/* Container centralizado */
+/* Sidebar fixa */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: #0d6efd;
+  padding-top: 20px;
+  color: white;
+  z-index: 1030; /* sobre bootstrap navbar */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Links da sidebar */
+.sidebar a {
+  color: white;
+  padding: 10px 20px;
+  width: 100%;
+  text-decoration: none;
+  font-weight: 500;
+  display: block;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: #0a58ca;
+  text-decoration: none;
+}
+
+/* Saudação do usuário na sidebar */
+.user-greeting {
+  padding: 0 20px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Área principal do conteúdo */
+.content {
+  margin-left: 250px; /* desloca para a direita da sidebar */
+  padding: 40px;
+  max-width: 1000px;
+  margin-right: auto;
+  min-height: 100vh; /* altura mínima para ocupar toda a tela */
+}
+
+/* Container branco centralizado dentro do conteúdo */
 .container {
-    background: #ffffff;
-    padding: 40px 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    max-width: 500px;
-    margin: 5rem auto 0 auto; /* Centraliza horizontalmente e dá margem superior */
+  background: #ffffff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  max-width: 500px;
+  margin: 5rem auto 0 auto; /* centralizado horizontalmente */
 }
 
 /* Títulos principais */
 h1 {
-    color: #343a40;
-    font-weight: 700;
-    font-size: 2.8rem;
-    margin-bottom: 1.5rem;
+  color: #343a40;
+  font-weight: 700;
+  font-size: 2.8rem;
+  margin-bottom: 1.5rem;
 }
 
-/* Botões básicos */
+/* Botão personalizado "Adicionar" */
+.btn-add {
+  padding: 10px 25px;
+  font-weight: 600;
+  border-width: 1.5px;
+  border-style: solid;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+.btn-add:hover,
+.btn-add:focus {
+  background-color: #1e7e34;
+  border-color: #1e7e34;
+}
+
+/* Botões básicos Bootstrap customizados */
 .btn-primary,
 .btn-success,
 .btn-danger {
-    padding: 10px 25px;
-    font-weight: 600;
-    border-width: 1.5px;
-    border-style: solid;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    user-select: none;
+  padding: 10px 25px;
+  font-weight: 600;
+  border-width: 1.5px;
+  border-style: solid;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
 }
 
 /* Botão primário */
 .btn-primary {
-    background-color: #007bff;
-    border-color: #007bff;
-    color: white;
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
 }
-
 .btn-primary:hover,
 .btn-primary:focus {
-    background-color: #0056b3;
-    border-color: #0056b3;
+  background-color: #0056b3;
+  border-color: #0056b3;
 }
 
 /* Botão sucesso */
 .btn-success {
-    background-color: #28a745;
-    border-color: #28a745;
-    color: white;
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
 }
-
 .btn-success:hover,
 .btn-success:focus {
-    background-color: #1e7e34;
-    border-color: #1e7e34;
+  background-color: #1e7e34;
+  border-color: #1e7e34;
 }
 
 /* Botão perigo */
 .btn-danger {
-    background-color: #dc3545;
-    border-color: #dc3545;
-    color: white;
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: white;
 }
-
 .btn-danger:hover,
 .btn-danger:focus {
-    background-color: #a71d2a;
-    border-color: #a71d2a;
+  background-color: #a71d2a;
+  border-color: #a71d2a;
 }
 
-/* Espaçamento flexível para botões na navbar */
-/* Removido margin-top para não empurrar para baixo */
-.d-flex {
-    display: flex;
-    gap: 1rem; /* usa gap para espaçamento */
-    justify-content: center;
-}
-
-/* Navbar links normais */
+/* Navbar links personalizados (se usar navbar do bootstrap) */
 .navbar-nav .nav-link {
-    color: #0a3d62; /* azul escuro */
-    font-weight: 500;
-    transition: color 0.3s ease;
+  color: #0a3d62;
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
-
-/* Link ativo da navbar */
 .navbar-nav .nav-link.active {
-    color: #0652dd; /* azul mais vibrante */
-    font-weight: 700;
+  color: #0652dd;
+  font-weight: 700;
 }
-
-/* Hover/focus nos links da navbar */
 .navbar-nav .nav-link:hover,
 .navbar-nav .nav-link:focus {
-    color: #74b9ff; /* azul claro */
-    text-decoration: underline;
+  color: #74b9ff;
+  text-decoration: underline;
 }
 
-/* Botões customizados da navbar */
+/* Botões outline-light customizados na navbar */
 .navbar .btn-outline-light {
-    color: #0a3d62;
-    border-color: #0a3d62;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  color: #0a3d62;
+  border-color: #0a3d62;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
-
 .navbar .btn-outline-light:hover,
 .navbar .btn-outline-light:focus {
-    background-color: #0a3d62;
-    color: #ffffff;
-    border-color: #0a3d62;
+  background-color: #0a3d62;
+  color: #ffffff;
+  border-color: #0a3d62;
 }
 
+/* Botões light com texto azul */
 .navbar .btn-light.text-primary {
-    background-color: #74b9ff;
-    color: #0a3d62;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
+  background-color: #74b9ff;
+  color: #0a3d62;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
 }
-
 .navbar .btn-light.text-primary:hover,
 .navbar .btn-light.text-primary:focus {
-    background-color: #0984e3;
-    color: #f1f2f6;
+  background-color: #0984e3;
+  color: #f1f2f6;
 }
