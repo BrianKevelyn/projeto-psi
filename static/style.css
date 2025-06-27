@@ -92,6 +92,11 @@ h1 {
   border-color: #28a745;
   color: white;
 }
+
+.btn-add > a {
+    color: white;
+}
+
 .btn-add:hover,
 .btn-add:focus {
   background-color: #1e7e34;

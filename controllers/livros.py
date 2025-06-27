@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, abort
+from flask_login import login_required, current_user
 from models.livro import Livro
 from database.connection import db  # caso precise fazer commit
 
@@ -6,6 +7,8 @@ livros_bp = Blueprint('livros', __name__, url_prefix='/livros')
 
 @livros_bp.route('/adicionar_livro', methods=['GET', 'POST'])
 def adicionar_livro():
+    if current_user.usu_tipo != 'bibliotecario':
+         return redirect(url_for('main.index'))
     if request.method == 'POST':
         titulo = request.form.get('titulo')
         autor = request.form.get('autor')

@@ -8,8 +8,9 @@
   {% else %}
   <p>Não há livros cadastrados.</p>
   {% endfor %}
-
-  <a href="{{ url_for('livros.adicionar_livro') }}">Adicionar novo livro</a>
+  {% if current_user.usu_tipo == "bibliotecario" %}
+    <a href="{{ url_for('livros.adicionar_livro') }}">Adicionar novo livro</a>
+  {% endif %}
   <br>
   <a href="{{ url_for('main.index') }}">Voltar para Início</a>
 {% endblock %}
