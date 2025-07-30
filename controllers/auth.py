@@ -53,10 +53,7 @@ def register():
             flash('Email já cadastrado.', 'warning')
             return redirect(url_for('auth.register'))
 
-        if tipo not in ['cliente', 'bibliotecario']:
-            flash('Tipo inválido. Escolha Cliente ou Bibliotecário.', 'danger')
-            return redirect(url_for('auth.register'))
-
+       
         novo_usuario = Usuario(
             usu_nome=nome,
             usu_matricula=matricula,
