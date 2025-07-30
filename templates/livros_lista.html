@@ -21,7 +21,7 @@
             <p class="preco">R$ {{ "%.2f"|format(livro.liv_preco) }}</p>
             <a href="{{ url_for('livros.detalhes_livro', livro_id=livro.liv_id) }}" class="btn-detalhes">Ver detalhes</a>
 
-            <button class="btn-comprar">Comprar</button>
+            <button class="btn-comprar">Editar</button>
           </div>
         </div>
       {% endfor %}
