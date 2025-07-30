@@ -20,8 +20,13 @@
             <p class="autor">por {{ livro.liv_autor }}</p>
             <p class="preco">R$ {{ "%.2f"|format(livro.liv_preco) }}</p>
             <a href="{{ url_for('livros.detalhes_livro', livro_id=livro.liv_id) }}" class="btn-detalhes">Ver detalhes</a>
+            
+            {% if current_user.usu_tipo == "bibliotecario" %}
+              <button class="btn-comprar">Editar</button>
+            {% else %}
+              <button class="btn-comprar">Comprar</button>
+            {% endif %}
 
-            <button class="btn-comprar">Editar</button>
           </div>
         </div>
       {% endfor %}
