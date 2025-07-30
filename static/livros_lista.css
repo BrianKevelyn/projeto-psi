@@ -1,0 +1,77 @@
+.livros-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+.livro-card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: default;
+    }
+.livro-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+.livro-img img {
+      width: 160px;
+      height: 240px;
+      object-fit: cover;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 15px;
+    }
+.livro-info h3 {
+      margin: 0 0 8px 0;
+      font-size: 1.15rem;
+      color: #222;
+      text-align: center;
+    }
+.livro-info .autor {
+      font-style: italic;
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+.livro-info .preco {
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #e76f51;
+      margin-bottom: 15px;
+    }
+.btn-comprar {
+      background-color: #23b35a;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+.btn-comprar:hover {
+      background-color: #1f7a6e;
+    }
+.btn-adicionar {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #264653;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+.btn-adicionar:hover {
+      background-color: #1e374a;
+    }

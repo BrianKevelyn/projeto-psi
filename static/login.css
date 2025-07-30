@@ -1,80 +1,156 @@
-/* Container do formulário */
-form {
-    max-width: 350px;
-    margin: 2rem auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Reset básico e estilo do body */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #343a40;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Wrapper que centraliza vertical e horizontalmente */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Container branco com sombra que engloba form e p */
+.container-login {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  max-width: 350px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* Título */
 h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
 }
 
 /* Labels */
 form label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: #555;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
 }
 
 /* Inputs */
 form input[type="text"],
 form input[type="password"] {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 15px;
-    border: 1.8px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 15px;
+  border: 1.8px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
 }
 
 form input[type="text"]:focus,
 form input[type="password"]:focus {
-    border-color: #007bff;
-    outline: none;
+  border-color: #007bff;
+  outline: none;
 }
 
 /* Botão */
 form button {
-    width: 100%;
-    padding: 12px;
-    background-color: #007bff;
-    border: none;
-    border-radius: 6px;
-    color: white;
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 form button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
-/* Link de cadastro */
-form p {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 0.95rem;
-    color: #555;
+/* Parágrafo abaixo do formulário */
+.container-login p {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 0; /* tira margem extra */
 }
 
-form p a {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: 600;
+/* Link dentro do parágrafo */
+.container-login p a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
 }
 
-form p a:hover {
-    text-decoration: underline;
+.container-login p a:hover {
+  text-decoration: underline;
 }
 
+/* Flash messages container fixo no topo */
+.flash-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 350px;
+  width: 90vw;
+  z-index: 9999;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* Flash message estilo */
+.flash-message {
+  position: relative;
+  padding: 12px 20px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  font-weight: 600;
+  color: #333;
+  background-color: #e9ecef;
+}
+
+/* Categorias flash */
+.flash-message.error {
+  background-color: #f8d7da;
+  color: #842029;
+  border: 1px solid #f5c2c7;
+}
+
+.flash-message.success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border: 1px solid #badbcc;
+}
+
+/* Botão fechar flash */
+.close-btn {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: inherit;
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0;
+}

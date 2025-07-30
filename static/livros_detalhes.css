@@ -1,0 +1,112 @@
+.detalhes-container {
+  max-width: 900px;
+  margin: 40px auto;
+  display: flex;
+  gap: 40px;
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.imagem-livro {
+  flex: 1 1 350px;
+  max-width: 350px;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+  transition: transform 0.3s ease;
+}
+
+.imagem-livro img {
+  width: 100%;
+  display: block;
+  height: auto;
+}
+
+.imagem-livro:hover {
+  transform: scale(1.05);
+}
+
+.info-livro {
+  flex: 1 1 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.info-livro h2 {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  font-weight: 700;
+  border-bottom: 3px solid #e67e22;
+  padding-bottom: 6px;
+}
+
+.info-livro p {
+  font-size: 1.1rem;
+  color: #34495e;
+  line-height: 1.5;
+  margin: 8px 0;
+}
+
+.info-livro p strong {
+  color: #e67e22;
+}
+
+.btn-voltar {
+  align-self: flex-start;
+  margin-top: 30px;
+  padding: 12px 25px;
+  background-color: #e67e22;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(230, 126, 34, 0.5);
+  transition: background-color 0.3s ease;
+}
+
+.btn-voltar:hover {
+  background-color: #d35400;
+  box-shadow: 0 6px 15px rgba(211, 84, 0, 0.6);
+}
+
+.btn-comprar {
+  margin-top: 25px;
+  padding: 12px 25px;
+  background-color: #27ae60;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(39, 174, 96, 0.6);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  align-self: flex-start;
+}
+
+.btn-comprar:hover {
+  background-color: #219150;
+  box-shadow: 0 7px 20px rgba(33, 145, 80, 0.8);
+}
+
+@media (max-width: 768px) {
+  .detalhes-container {
+    flex-direction: column;
+    max-width: 90%;
+  }
+  
+  .imagem-livro, .info-livro {
+    max-width: 100%;
+    flex: none;
+  }
+  
+  .info-livro h2 {
+    font-size: 2rem;
+  }
+}

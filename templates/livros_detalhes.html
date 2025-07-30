@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalhes do Livro - {{ livro.liv_titulo }}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='livros_detalhes.css') }}">
+  <div class="detalhes-container">
+    <div class="imagem-livro">
+      {% if livro.liv_capa_url %}
+        <img src="{{ livro.liv_capa_url }}" alt="Capa do livro {{ livro.liv_titulo }}">
+      {% else %}
+        <img src="{{ url_for('static', filename='images/placeholder_book.png') }}" alt="Capa padrão">
+      {% endif %}
+      
+    </div>
+    <div class="info-livro">
+      <h2>{{ livro.liv_titulo }}</h2>
+      <p><strong>Autor:</strong> {{ livro.liv_autor }}</p>
+      <p><strong>Editora:</strong> {{ livro.liv_editora }}</p>
+      <p><strong>Ano:</strong> {{ livro.liv_ano }}</p>
+      <p><strong>Gênero:</strong> {{ livro.liv_genero }}</p>
+      <p><strong>Quantidade:</strong> {{ livro.liv_quantidade }}</p>
+      <p><strong>Preço:</strong> R$ {{ "%.2f"|format(livro.liv_preco) }}</p>
+
+      <div class="botoes-container">
+        <button class="btn-comprar">Comprar</button>
+        <a href="{{ url_for('livros.lista_livros') }}" class="btn-voltar">Voltar</a>
+      </div>
+
+    </div>
+
+  </div>
+{% endblock %}

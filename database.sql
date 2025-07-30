@@ -1,4 +1,3 @@
--- Criação da tabela tb_usuarios
 CREATE TABLE IF NOT EXISTS tb_usuarios (
     usu_id INTEGER PRIMARY KEY AUTOINCREMENT,
     usu_nome VARCHAR(100) NOT NULL,
@@ -6,10 +5,9 @@ CREATE TABLE IF NOT EXISTS tb_usuarios (
     usu_telefone VARCHAR(20),
     usu_email VARCHAR(100) UNIQUE,
     usu_tipo VARCHAR(50),
-    usu_senha VARCHAR(100)
+    usu_senha VARCHAR(255) NOT NULL
 );
 
--- Criação da tabela tb_livros
 CREATE TABLE IF NOT EXISTS tb_livros (
     liv_id INTEGER PRIMARY KEY AUTOINCREMENT,
     liv_titulo VARCHAR(200) NOT NULL,
@@ -18,10 +16,10 @@ CREATE TABLE IF NOT EXISTS tb_livros (
     liv_ano INTEGER,
     liv_autor VARCHAR(100),
     liv_genero VARCHAR(50),
-    liv_quantidade INTEGER
+    liv_quantidade INTEGER,
+    liv_preco REAL
 );
 
--- Criação da tabela tb_reservas
 CREATE TABLE IF NOT EXISTS tb_reservas (
     res_id INTEGER PRIMARY KEY AUTOINCREMENT,
     res_usu_id INTEGER NOT NULL,
@@ -32,7 +30,6 @@ CREATE TABLE IF NOT EXISTS tb_reservas (
     FOREIGN KEY (res_liv_id) REFERENCES tb_livros(liv_id)
 );
 
--- Criação da tabela tb_emprestimos
 CREATE TABLE IF NOT EXISTS tb_emprestimos (
     emp_id INTEGER PRIMARY KEY AUTOINCREMENT,
     emp_usu_id INTEGER NOT NULL,

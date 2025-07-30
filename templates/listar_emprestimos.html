@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Meus Empréstimos{% endblock %}
+
+{% block content %}
+<h1>Meus Empréstimos</h1>
+
+{% if emprestimos %}
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Livro</th>
+        <th>Data do Empréstimo</th>
+        <th>Data para Devolver</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for emp in emprestimos %}
+      <tr>
+        <td>{{ emp.livro.liv_titulo }}</td>
+        <td>{{ emp.emp_data_emprestimo.strftime('%d/%m/%Y') }}</td>
+        <td>{{ emp.emp_data_a_devolver.strftime('%d/%m/%Y') }}</td>
+        <td>{{ emp.status }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>Você não possui empréstimos ativos.</p>
+{% endif %}
+
+{% endblock %}

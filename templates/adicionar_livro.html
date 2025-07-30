@@ -1,46 +1,49 @@
-<!-- templates/index.html -->
 {% extends 'base.html' %}
 
-{% block title %}Página Inicial{% endblock %}
-
+{% block title %}Adicionar Livro{% endblock %}
 
 {% block content %}
-  <h1>Adicionar livro</h1>
+<link rel="stylesheet" href="{{ url_for('static', filename='adicionar_livros.css') }}">
+  <h1>Adicionar Livro</h1>
+  
+  <form method="POST" action="{{ url_for('livros.adicionar_livro') }}">
+  <div class="form-group">
+    <label for="titulo">Título:</label>
+    <input type="text" id="titulo" name="titulo" value="{{ titulo|default('') }}" required>
+  </div>
+  <div class="form-group">
+    <label for="descricao">Descrição:</label>
+    <input type="text" id="descricao" name="descricao" value="{{ descricao|default('') }}">
+  </div>
+  <div class="form-group">
+    <label for="ano">Ano:</label>
+    <input type="number" id="ano" name="ano" value="{{ ano|default('') }}">
+  </div>
+  <div class="form-group">
+    <label for="autor">Autor:</label>
+    <input type="text" id="autor" name="autor" value="{{ autor|default('') }}" required>
+  </div>
+  <div class="form-group">
+    <label for="editora">Editora:</label>
+    <input type="text" id="editora" name="editora" value="{{ editora|default('') }}">
+  </div>
+  <div class="form-group">
+    <label for="genero">Gênero:</label>
+    <input type="text" id="genero" name="genero" value="{{ genero|default('') }}">
+  </div>
+  <div class="form-group">
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" id="quantidade" name="quantidade" value="{{ quantidade|default('') }}">
+  </div>
+  <div class="form-group">
+    <label for="preco">Preço (R$):</label>
+    <input type="number" id="preco" name="preco" step="0.01" min="0" value="{{ preco|default('') }}">
+  </div>
 
-  {% if erro %}
-    <div style="color:red;">{{ erro }}</div>
-  {% endif %}
+  <button type="submit" class="btn-submit">Enviar</button>
+</form>
 
-  <form method="POST" action="{{ url_for('livros.adicionar_livro') }}"">
-    <div>
-      <label for="titulo">Título:</label>
-      <input type="text" id="titulo" name="titulo" required>
-    </div>
-    <div>
-      <label for="descricao">Descricao:</label>
-      <input type="text" id="descricao" name="descricao" required>
-    </div>
-    <div>
-      <label for="ano">Ano:</label>
-      <input type="number" id="ano" name="ano" required>
-    </div>
-    <div>
-      <label for="autor">Autor:</label>
-      <input type="text" id="autor" name="autor" required>
-    </div>
-    <div>
-      <label for="editora">Editora:</label>
-      <input type="text" id="editora" name="editora" required>
-    </div>
-    <div>
-      <label for="genero">Gênero:</label>
-      <input type="text" id="genero" name="genero" required>
-    </div>
-    <div>
-      <label for="quantidade">Quantidade:</label>
-      <input type="number" id="quantidade" name="quantidade" required>
-    </div>
-    <button type="submit">Enviar</button>
-  </form>
-  <a href="{{ url_for('main.index') }}">Voltar para Início</a>
+
+  <a href="{{ url_for('main.index') }}" class="btn-voltar">Voltar para Início</a>
+
 {% endblock %}

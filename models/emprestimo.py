@@ -8,5 +8,9 @@ class Emprestimo(db.Model):
     emp_liv_id = db.Column(db.Integer, db.ForeignKey('tb_livros.liv_id'), nullable=False)
     emp_data_emprestimo = db.Column(db.Date)
     emp_data_a_devolver = db.Column(db.Date)
-    emp_data_devolucao = db.Column(db.Date)
+    emp_data_devolucao = db.Column(db.Date, nullable=True)
     status = db.Column(db.String(50))
+
+    livro = db.relationship('Livro', backref='emprestimos')
+
+    usuario = db.relationship('Usuario', backref='emprestimos')

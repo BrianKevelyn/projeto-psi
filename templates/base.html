@@ -1,4 +1,3 @@
-<!-- templates/layout.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -11,7 +10,7 @@
 </head>
 <body>
 
-  <div class="sidebar" style="position: fixed; height: 100vh; width: 250px; background-color: #0d6efd; padding: 20px; color: white;">
+  <div class="sidebar">
     <h4 class="text-center mb-4">📚 Biblioteca</h4>
 
     <a href="{{ url_for('main.index') }}" class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}">Início</a>
@@ -19,7 +18,8 @@
       <a href="{{ url_for('livros.adicionar_livro') }}" class="nav-link {% if request.endpoint == 'livros.adicionar_livro' %}active{% endif %}">Adicionar Livro</a>
     {% endif %}
     <a href="{{ url_for('livros.lista_livros') }}" class="nav-link {% if request.endpoint == 'livros.lista_livros' %}active{% endif %}">Livros</a>
-    <a href="{{ url_for('livros.emprestimo_livro') }}" class="d-block text-white mb-2 {% if request.endpoint == 'main.emprestimos' %}active{% endif %}">Empréstimos</a>
+    <a href="{{ url_for('livros.emprestimo_livro') }}" class="d-block text-white mb-2 {% if request.endpoint == 'livros.emprestimo_livro' %}active{% endif %}">Empréstimos</a>
+
     <a href="{{ url_for('main.perfil') }}" class="d-block text-white mb-2 {% if request.endpoint == 'main.perfil' %}active{% endif %}">Perfil</a>
     
     <hr class="bg-light">

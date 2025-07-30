@@ -11,3 +11,4 @@ class Livro(db.Model):
     liv_autor = db.Column(db.String(100))
     liv_genero = db.Column(db.String(50))
     liv_quantidade = db.Column(db.Integer)
+    liv_preco = db.Column(db.Float)

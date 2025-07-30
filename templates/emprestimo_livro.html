@@ -1,10 +1,37 @@
-<!-- templates/index.html -->
 {% extends 'base.html' %}
 
-{% block title %}Página Inicial{% endblock %}
-
+{% block title %}Novo Empréstimo{% endblock %}
 
 {% block content %}
-  <h1>Emprestimo</h1>
+  <h1>Registrar Empréstimo</h1>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  {% if livros %}
+    <form method="POST" action="{{ url_for('livros.emprestimo_livro', liv_id=0) }}">
+
+      <label for="livro_id">Selecione o livro:</label>
+      <select name="livro_id" id="livro_id" required>
+        <option value="" disabled selected>-- Escolha um livro --</option>
+        {% for livro in livros %}
+          <option value="{{ livro.liv_id }}">{{ livro.liv_titulo }} - Disponível: {{ livro.liv_quantidade }}</option>
+        {% endfor %}
+      </select>
+      <br><br>
+      <button type="submit" class="btn btn-primary">Registrar Empréstimo</button>
+    </form>
+  {% else %}
+    <p>Não há livros disponíveis para empréstimo no momento.</p>
+  {% endif %}
+
+  <br>
+
+  <a href="{{ url_for('livros.listar_emprestimos') }}">Meus Empréstimos</a>
   <a href="{{ url_for('main.index') }}">Voltar para Início</a>
 {% endblock %}

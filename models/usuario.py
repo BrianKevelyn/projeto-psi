@@ -21,3 +21,7 @@ class Usuario(db.Model, UserMixin):
 
     def get_id(self):
         return str(self.usu_id)
+
+    @property
+    def id(self):
+        return self.usu_id
