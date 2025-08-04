@@ -4,6 +4,9 @@
 
 
 {% block content %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='perfil.css') }}">
+
+
   <h1>Perfil</h1>
-  <a href="{{ url_for('main.index') }}">Voltar para Início</a>
+  <a href="{{ url_for('main.index') }}" class="voltar_inicio">Voltar para Início</a>
 {% endblock %}

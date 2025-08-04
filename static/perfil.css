@@ -1,0 +1,11 @@
+.voltar_inicio {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #264653;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
