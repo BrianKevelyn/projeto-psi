@@ -1,0 +1,25 @@
+.btn-emprestimos {
+  width: 100%;
+  padding: 12px;
+  background-color: #2a9d8f;
+  border: none;
+  color: white;
+  font-weight: 700;
+  border-radius: 7px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-voltar {
+  width: 100%;
+  padding: 12px;
+  background-color: #c02b33;
+  border: none;
+  color: white;
+  font-weight: 700;
+  border-radius: 7px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}

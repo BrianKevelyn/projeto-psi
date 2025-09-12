@@ -2,97 +2,97 @@ h1 {
       text-align: center;
       color: #264653;
       margin-bottom: 25px;
-    }
-    form {
-      max-width: 450px;
-      margin: 0 auto;
-      background-color: #f9f9f9;
-      padding: 25px 30px;
-      border-radius: 10px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-    }
-    .form-group {
-      margin-bottom: 18px;
-      display: flex;
-      flex-direction: column;
-    }
-    label {
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #333;
-    }
-    input[type="text"],
-    input[type="number"] {
-      padding: 8px 12px;
-      font-size: 1rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      transition: border-color 0.3s ease;
-    }
-    input[type="text"]:focus,
-    input[type="number"]:focus {
-      border-color: #2a9d8f;
-      outline: none;
-      box-shadow: 0 0 6px rgba(42,157,143,0.4);
-    }
-    .btn-submit {
-      width: 100%;
-      padding: 12px;
-      background-color: #2a9d8f;
-      border: none;
-      color: white;
-      font-weight: 700;
-      font-size: 1.1rem;
-      border-radius: 7px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .btn-submit:hover {
-      background-color: #20746f;
-    }
-    .btn-voltar {
-      display: block;
-      max-width: 450px;
-      margin: 20px auto 0 auto;
-      text-align: center;
-      text-decoration: none;
-      color: #264653;
-      font-weight: 600;
-      font-size: 1rem;
-      transition: color 0.3s ease;
-    }
-    .btn-voltar:hover {
-      color: #2a9d8f;
-      text-decoration: underline;
-    }
-    /* Flash messages */
-    .flash-messages {
-      max-width: 450px;
-      margin: 0 auto 20px auto;
-    }
-    .flash-message {
-      position: relative;
-      padding: 12px 18px;
-      border-radius: 7px;
-      margin-bottom: 10px;
-      font-weight: 600;
-      color: white;
-    }
-    .flash-message.success {
-      background-color: #2a9d8f;
-    }
-    .flash-message.error {
-      background-color: #e76f51;
-    }
-    .close-btn {
-      position: absolute;
-      right: 8px;
-      top: 8px;
-      background: none;
-      border: none;
-      color: white;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      line-height: 1;
-    }
+}
+form {
+  max-width: 450px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 25px 30px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+.form-group {
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+}
+label {
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+input[type="text"],
+input[type="number"] {
+  padding: 8px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
+}
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-color: #2a9d8f;
+  outline: none;
+  box-shadow: 0 0 6px rgba(42,157,143,0.4);
+}
+.btn-submit {
+  width: 100%;
+  padding: 12px;
+  background-color: #2a9d8f;
+  border: none;
+  color: white;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.btn-submit:hover {
+  background-color: #20746f;
+}
+.btn-voltar {
+  display: block;
+  max-width: 450px;
+  margin: 20px auto 0 auto;
+  text-align: center;
+  text-decoration: none;
+  color: #264653;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+.btn-voltar:hover {
+  color: #2a9d8f;
+  text-decoration: underline;
+}
+/* Flash messages */
+.flash-messages {
+  max-width: 450px;
+  margin: 0 auto 20px auto;
+}
+.flash-message {
+  position: relative;
+  padding: 12px 18px;
+  border-radius: 7px;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: white;
+}
+.flash-message.success {
+  background-color: #2a9d8f;
+}
+.flash-message.error {
+  background-color: #e76f51;
+}
+.close-btn {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  line-height: 1;
+}

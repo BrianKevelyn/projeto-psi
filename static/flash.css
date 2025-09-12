@@ -1,56 +1,33 @@
 .flash-container {
-    position: fixed; /* fixo na tela */
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1050; /* na frente de tudo */
-    width: auto;
-    max-width: 90%;
-    pointer-events: none; /* deixa clicar só nos botões */
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* Cada mensagem flash */
 .flash-message {
-    pointer-events: auto; /* ativa interação do mouse */
-    background-color: #f8d7da; /* padrão vermelho para erro */
-    color: #842029;
-    padding: 12px 20px;
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    font-weight: 600;
-    position: relative;
-    min-width: 250px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  min-width: 200px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* Cores por categoria (ajuste conforme suas categorias) */
-.flash-message.success {
-    background-color: #d1e7dd;
-    color: #0f5132;
-}
+.flash-message.success { background-color: #28a745; }
+.flash-message.error { background-color: #dc3545; }
+.flash-message.info { background-color: #2a9d8f; }
 
-.flash-message.info {
-    background-color: #cff4fc;
-    color: #055160;
-}
-
-.flash-message.warning {
-    background-color: #fff3cd;
-    color: #664d03;
-}
-
-.close-btn {
-    position: absolute;
-    top: 5px;
-    right: 8px;
-    background: transparent;
-    border: none;
-    font-size: 20px;
-    line-height: 1;
-    cursor: pointer;
-    color: inherit;
-    font-weight: bold;
-    user-select: none;
+.flash-message .close-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
 }

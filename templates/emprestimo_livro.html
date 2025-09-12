@@ -1,37 +1,72 @@
 {% extends 'base.html' %}
 
-{% block title %}Novo Empréstimo{% endblock %}
+{% block title %}Empréstimos{% endblock %}
 
 {% block content %}
-  <h1>Registrar Empréstimo</h1>
+<h1>Gerenciar Empréstimos</h1>
 
-  {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-      {% for category, message in messages %}
-        <div class="alert alert-{{ category }}">{{ message }}</div>
-      {% endfor %}
+<ul class="nav nav-tabs" id="emprestimoTabs" role="tablist">
+  <li class="nav-item">
+    <button class="nav-link active" id="novo-tab" data-bs-toggle="tab" data-bs-target="#novo" type="button" role="tab">
+      Registrar Empréstimo
+    </button>
+  </li>
+  <li class="nav-item">
+    <button class="nav-link" id="meus-tab" data-bs-toggle="tab" data-bs-target="#meus" type="button" role="tab">
+      Meus Empréstimos
+    </button>
+  </li>
+</ul>
+
+<div class="tab-content mt-3" id="emprestimoTabsContent">
+  <div class="tab-pane fade show active" id="novo" role="tabpanel">
+    {% if livros %}
+      <form method="POST" action="{{ url_for('livros.emprestimo_livro') }}">
+        <label for="livro_id">Selecione o livro:</label>
+        <select name="livro_id" id="livro_id" class="form-select" required>
+          <option value="" disabled selected>-- Escolha um livro --</option>
+          {% for livro in livros %}
+            <option value="{{ livro.liv_id }}">
+              {{ livro.liv_titulo }} - Disponível: {{ livro.liv_quantidade }}
+            </option>
+          {% endfor %}
+        </select>
+        <br>
+        <button type="submit" class="btn btn-primary">Registrar Empréstimo</button>
+      </form>
+    {% else %}
+      <p>Não há livros disponíveis no momento.</p>
     {% endif %}
-  {% endwith %}
+  </div>
 
-  {% if livros %}
-    <form method="POST" action="{{ url_for('livros.emprestimo_livro', liv_id=0) }}">
-
-      <label for="livro_id">Selecione o livro:</label>
-      <select name="livro_id" id="livro_id" required>
-        <option value="" disabled selected>-- Escolha um livro --</option>
-        {% for livro in livros %}
-          <option value="{{ livro.liv_id }}">{{ livro.liv_titulo }} - Disponível: {{ livro.liv_quantidade }}</option>
+  <div class="tab-pane fade" id="meus" role="tabpanel">
+  {% if emprestimos %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Livro</th>
+          <th>Data Empréstimo</th>
+          <th>Devolver até</th>
+          <th>Devolvido em</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for emp in emprestimos %}
+          <tr>
+            <td>{{ emp.livro.liv_titulo }}</td>
+            <td>{{ emp.emp_data_emprestimo.strftime("%d/%m/%Y") if emp.emp_data_emprestimo else "-" }}</td>
+            <td>{{ emp.emp_data_a_devolver.strftime("%d/%m/%Y") if emp.emp_data_a_devolver else "-" }}</td>
+            <td>{{ emp.emp_data_devolucao.strftime("%d/%m/%Y") if emp.emp_data_devolucao else "-" }}</td>
+            <td>{{ emp.status }}</td>
+          </tr>
         {% endfor %}
-      </select>
-      <br><br>
-      <button type="submit" class="btn btn-primary">Registrar Empréstimo</button>
-    </form>
+      </tbody>
+    </table>
   {% else %}
-    <p>Não há livros disponíveis para empréstimo no momento.</p>
+    <p>Você não possui empréstimos no momento.</p>
   {% endif %}
+</div>
 
-  <br>
-
-  <a href="{{ url_for('livros.listar_emprestimos') }}">Meus Empréstimos</a>
-  <a href="{{ url_for('main.index') }}">Voltar para Início</a>
+<a class="btn btn-secondary mt-3" href="{{ url_for('main.index') }}">Voltar</a>
 {% endblock %}

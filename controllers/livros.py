@@ -71,11 +71,84 @@ def adicionar_livro():
 
     return render_template('adicionar_livro.html')
 
+@livros_bp.route('/editar/<int:livro_id>', methods=['GET', 'POST'])
+@login_required
+def editar_livro(livro_id):
+    livro = Livro.query.get_or_404(livro_id)
+    if current_user.usu_tipo != "bibliotecario":
+        flash("Você não tem permissão para editar livros.", "danger")
+        return redirect(url_for('livros.lista_livros'))
+
+    if request.method == "POST":
+        livro.liv_titulo = request.form['titulo']
+        livro.liv_autor = request.form['autor']
+        livro.liv_editora = request.form['editora']
+        livro.liv_ano = request.form['ano']
+        livro.liv_genero = request.form['genero']
+        livro.liv_preco = request.form['preco']
+        livro.liv_descricao = request.form['descricao']
+        livro.liv_quantidade = request.form['quantidade']
+        db.session.commit()
+
+        flash("Livro atualizado com sucesso!", "success")
+        return redirect(url_for('livros.lista_livros'))
+
+    return render_template('editar_livro.html', livro=livro)
+
 @livros_bp.route('/lista_livros')
 @login_required
 def lista_livros():
     livros = Livro.query.all()
     return render_template('livros_lista.html', livros=livros)
+
+@livros_bp.route('/comprar/<int:livro_id>', methods=['POST'])
+@login_required
+def comprar_livro(livro_id):
+    livro = Livro.query.get_or_404(livro_id)
+
+    if livro.liv_quantidade < 1:
+        flash("Livro indisponível no momento.", "error")
+        return redirect(url_for('livros.lista_livros'))
+
+    hoje = datetime.now().date()
+    devolucao = hoje + timedelta(days=7)  
+
+    emprestimo = Emprestimo(
+        emp_usu_id=current_user.usu_id,
+        emp_liv_id=livro.liv_id,
+        emp_data_emprestimo=hoje,
+        emp_data_a_devolver=devolucao,
+        status="Em andamento"
+    )
+
+    db.session.add(emprestimo)
+    livro.liv_quantidade -= 1
+    db.session.commit()
+
+    flash(f"Você comprou/empréstimo do livro '{livro.liv_titulo}' foi registrado com sucesso!", "success")
+    return redirect(url_for('livros.lista_livros'))
+
+@livros_bp.route('/excluir_livro/<int:livro_id>', methods=['POST'])
+@login_required
+def excluir_livro(livro_id):
+    if current_user.usu_tipo != 'bibliotecario':
+        flash("Você não tem permissão para fazer isso.", "error")
+        return redirect(url_for('livros.lista_livros'))
+
+    livro = Livro.query.get_or_404(livro_id)
+
+    # Verifica se há empréstimos ativos
+    emprestimos_existentes = Emprestimo.query.filter_by(emp_liv_id=livro.liv_id, status="Em andamento").first()
+    if emprestimos_existentes:
+        flash(f"Não é possível excluir '{livro.liv_titulo}' porque existem empréstimos ativos.", "error")
+        return redirect(url_for('livros.lista_livros'))
+
+    db.session.delete(livro)
+    db.session.commit()
+    flash(f"Livro '{livro.liv_titulo}' excluído com sucesso!", "success")
+    return redirect(url_for('livros.lista_livros'))
+
+
 
 @livros_bp.route('/detalhes/<int:livro_id>')
 @login_required
@@ -101,7 +174,7 @@ def emprestimo_livro():
         devolucao = hoje + timedelta(days=7)
         
         emprestimo = Emprestimo(
-            emp_usu_id=current_user.id,
+            emp_usu_id=current_user.usu_id, 
             emp_liv_id=livro.liv_id,
             emp_data_emprestimo=hoje,
             emp_data_a_devolver=devolucao,
@@ -112,10 +185,23 @@ def emprestimo_livro():
         db.session.commit()
 
         flash("Empréstimo registrado com sucesso!", "success")
-        return redirect(url_for('main.index'))
+        return redirect(url_for('livros.emprestimo_livro'))
 
+    # pega livros disponíveis
     livros_disponiveis = Livro.query.filter(Livro.liv_quantidade > 0).all()
-    return render_template('emprestimo_livro.html', livros=livros_disponiveis)
+
+    # pega empréstimos do usuário
+    if current_user.usu_tipo == 'bibliotecario':
+        emprestimos = Emprestimo.query.all()
+    else:
+        emprestimos = Emprestimo.query.filter_by(emp_usu_id=current_user.usu_id).all()
+
+    return render_template(
+        'emprestimo_livro.html',
+        livros=livros_disponiveis,
+        emprestimos=emprestimos
+    )
+
 
 @livros_bp.route('/emprestimos')
 @login_required
