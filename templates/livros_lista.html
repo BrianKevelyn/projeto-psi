@@ -46,10 +46,12 @@
 {% else %}
 <p>Não há livros cadastrados.</p>
 {% endif %}
+<div class="acoes">
+  {% if current_user.usu_tipo == "bibliotecario" %}
+    <a href="{{ url_for('livros.adicionar_livro') }}" class="btn-adicionar">Adicionar novo livro</a>
+  {% endif %}
+  
+  <a href="{{ url_for('main.index') }}" class="btn-voltar_inicio">Voltar</a>
+  {% endblock %}
+</div>
 
-{% if current_user.usu_tipo == "bibliotecario" %}
-<a href="{{ url_for('livros.adicionar_livro') }}" class="btn-adicionar">Adicionar novo livro</a>
-{% endif %}
-
-<a href="{{ url_for('main.index') }}" class="btn-voltar_inicio">Voltar</a>
-{% endblock %}

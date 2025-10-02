@@ -94,7 +94,9 @@
 }
 
 .btn-adicionar { margin: 30px 0 10px 0; }
-.btn-voltar_inicio { margin-bottom: 30px; }
+.btn-voltar_inicio { 
+  margin-bottom: 30px;
+  padding: 10px; }
 
 .btn-comprar { background-color: #28a745; }
 .btn-comprar:hover { background-color: #218838; }
@@ -107,8 +109,21 @@
 
 .btn-esgotado { background-color: #dc3545; cursor: not-allowed; }
 
-.btn-adicionar { background-color: #2a9d8f; }
+.btn-adicionar { 
+  background-color: #2a9d8f;
+  margin-top: 100px;
+  padding: 10px;
+ }
 .btn-adicionar:hover { background-color: #1b5f57; }
 
-.btn-voltar_inicio { background-color: #264653; }
+.btn-voltar_inicio { 
+  background-color: #264653;
+  padding: 10px;
+  margin-top: 50px; }
 .btn-voltar_inicio:hover { background-color: #1e374a; }
+
+.acoes{
+  padding: 10px;
+  margin: 2rem 0 0 1rem;
+  gap: 1rem;
+}
