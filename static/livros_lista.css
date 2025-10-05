@@ -50,6 +50,7 @@
 .livro-info .esgotado {
   font-weight: bold;
   margin-bottom: 12px;
+  padding: 10px ;
   text-align: center;
 }
 
