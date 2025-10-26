@@ -7,22 +7,28 @@
 {% if emprestimos %}
   <table class="table">
     <thead>
-      <tr>
-        <th>Livro</th>
-        <th>Data do Empréstimo</th>
-        <th>Data para Devolver</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
       {% for emp in emprestimos %}
       <tr>
         <td>{{ emp.livro.liv_titulo }}</td>
         <td>{{ emp.emp_data_emprestimo.strftime('%d/%m/%Y') }}</td>
         <td>{{ emp.emp_data_a_devolver.strftime('%d/%m/%Y') }}</td>
-        <td>{{ emp.status }}</td>
+        <td>
+          {% set status = emp.status.lower() if emp.status else '' %}
+          {% if status == 'atrasado' %}
+            <span class="text-danger fw-bold">
+              <i class="bi bi-exclamation-triangle-fill"></i> {{ emp.status }}
+            </span>
+          {% elif status == 'devolvido' %}
+            <span class="text-success fw-bold">{{ emp.status }}</span>
+          {% elif status == 'em andamento' %}
+            <span class="text-warning fw-bold">{{ emp.status }}</span>
+          {% else %}
+            <span>{{ emp.status }}</span>
+          {% endif %}
+        </td>
       </tr>
       {% endfor %}
+
     </tbody>
   </table>
 {% else %}

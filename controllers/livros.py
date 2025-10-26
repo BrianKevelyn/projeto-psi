@@ -99,7 +99,11 @@ def editar_livro(livro_id):
 @login_required
 def lista_livros():
     livros = Livro.query.all()
-    return render_template('livros_lista.html', livros=livros)
+
+    emprestimos_usuario = Emprestimo.query.filter_by(emp_usu_id=current_user.usu_id).all()
+    meus_livros = [emp.livro for emp in emprestimos_usuario]
+
+    return render_template('livros_lista.html', livros=livros, meus_livros=meus_livros)
 
 @livros_bp.route('/comprar/<int:livro_id>', methods=['POST'])
 @login_required
@@ -196,11 +200,54 @@ def emprestimo_livro():
     else:
         emprestimos = Emprestimo.query.filter_by(emp_usu_id=current_user.usu_id).all()
 
+    # 🔹 Atualiza status para "Atrasado" se a data de devolução já passou
+    hoje = date.today()
+    atualizou = False
+
+    for emp in emprestimos:
+        data_limite = emp.emp_data_a_devolver
+        if isinstance(data_limite, datetime):
+            data_limite = data_limite.date()
+
+        if emp.status.lower() != "devolvido" and data_limite and data_limite < hoje:
+            if emp.status.lower() != "atrasado":
+                emp.status = "Atrasado"
+                atualizou = True
+
+    if atualizou:
+        db.session.commit()
+
+    # 🔹 O return deve ficar no final da função, fora do for e fora dos ifs
     return render_template(
         'emprestimo_livro.html',
         livros=livros_disponiveis,
         emprestimos=emprestimos
     )
+
+
+@livros_bp.route('/emprestimo_livro/<int:liv_id>')
+@login_required
+def emprestimo_por_livro(liv_id):
+    hoje = date.today()
+    atualizou = False
+
+    for emp in emprestimos:
+        # garante que emp_data_a_devolver seja do tipo date
+        data_limite = emp.emp_data_a_devolver
+        if isinstance(data_limite, datetime):
+            data_limite = data_limite.date()
+
+        # verifica se já passou da data limite e não está devolvido
+        if emp.status.lower() != "devolvido" and data_limite and data_limite < hoje:
+            if emp.status.lower() != "atrasado":
+                emp.status = "Atrasado"
+                atualizou = True
+
+        if atualizou:
+            db.session.commit()
+
+    return render_template('emprestimo_livro.html', livro=livro, emprestimos=emprestimos)
+
 
 
 @livros_bp.route('/emprestimos')
@@ -210,5 +257,23 @@ def listar_emprestimos():
         emprestimos = Emprestimo.query.all()
     else:
         emprestimos = Emprestimo.query.filter_by(emp_usu_id=current_user.usu_id).all()
+
+    hoje = date.today()
+    atualizou = False
+
+    for emp in emprestimos:
+        # garante que emp_data_a_devolver seja do tipo date
+        data_limite = emp.emp_data_a_devolver
+        if isinstance(data_limite, datetime):
+            data_limite = data_limite.date()
+
+        # verifica se já passou da data limite e não está devolvido
+        if emp.status.lower() != "devolvido" and data_limite and data_limite < hoje:
+            if emp.status.lower() != "atrasado":
+                emp.status = "Atrasado"
+                atualizou = True
+
+    if atualizou:
+        db.session.commit()
 
     return render_template('listar_emprestimos.html', emprestimos=emprestimos)

@@ -42,6 +42,21 @@
 
   <div class="tab-pane fade" id="meus" role="tabpanel">
   {% if emprestimos %}
+  
+    <!-- Resumo de Empréstimos -->
+    {% set total = emprestimos|length %}
+    {% set em_andamento = emprestimos|selectattr("status","equalto","Em andamento")|list|length %}
+    {% set devolvidos = emprestimos|selectattr("status","equalto","Devolvido")|list|length %}
+    {% set atrasados = emprestimos|selectattr("status","equalto","Atrasado")|list|length %}
+
+    <div class="mb-3">
+      <p><strong>Total de empréstimos:</strong> {{ total }}</p>
+      <p><strong>Em andamento:</strong> <span class="text-warning">{{ em_andamento }}</span></p>
+      <p><strong>Devolvidos:</strong> <span class="text-success">{{ devolvidos }}</span></p>
+      <p><strong>Atrasados:</strong> <span class="text-danger">{{ atrasados }}</span></p>
+    </div>
+
+    <!-- Tabela de Empréstimos -->
     <table class="table table-striped">
       <thead>
         <tr>
@@ -59,11 +74,23 @@
             <td>{{ emp.emp_data_emprestimo.strftime("%d/%m/%Y") if emp.emp_data_emprestimo else "-" }}</td>
             <td>{{ emp.emp_data_a_devolver.strftime("%d/%m/%Y") if emp.emp_data_a_devolver else "-" }}</td>
             <td>{{ emp.emp_data_devolucao.strftime("%d/%m/%Y") if emp.emp_data_devolucao else "-" }}</td>
-            <td>{{ emp.status }}</td>
+            <td>
+              {% set status = emp.status.lower() if emp.status else '' %}
+              {% if status == 'atrasado' %}
+                <span class="text-danger fw-bold">{{ emp.status }}</span>
+              {% elif status == 'devolvido' %}
+                <span class="text-success fw-bold">{{ emp.status }}</span>
+              {% elif status == 'em andamento' %}
+                <span class="text-warning fw-bold">{{ emp.status }}</span>
+              {% else %}
+                <span>{{ emp.status }}</span>
+              {% endif %}
+            </td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
+    
   {% else %}
     <p>Você não possui empréstimos no momento.</p>
   {% endif %}
@@ -71,3 +98,5 @@
 
 <a class="btn btn-secondary mt-3" href="{{ url_for('main.index') }}">Voltar</a>
 {% endblock %}
+
+
