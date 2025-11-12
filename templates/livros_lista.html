@@ -5,7 +5,6 @@
 {% block content %}
 <h2>Gerenciar Livros</h2>
 
-<!-- Abas -->
 <ul class="nav nav-tabs" id="livrosTabs" role="tablist">
   <li class="nav-item">
     <button class="nav-link active" id="catalogo-tab" data-bs-toggle="tab" data-bs-target="#catalogo" type="button" role="tab">
@@ -19,10 +18,8 @@
   </li>
 </ul>
 
-<!-- Conteúdo das abas -->
 <div class="tab-content mt-3" id="livrosTabsContent">
 
-  <!-- Aba Catálogo -->
   <div class="tab-pane fade show active" id="catalogo" role="tabpanel">
     {% if livros %}
       <link rel="stylesheet" href="{{ url_for('static', filename='livros_lista.css') }}">
@@ -92,10 +89,12 @@
   </div>
 </div>
 
-<!-- Botões -->
-{% if current_user.usu_tipo == "bibliotecario" %}
-  <a href="{{ url_for('livros.adicionar_livro') }}" class="btn-adicionar">Adicionar novo livro</a>
-{% endif %}
+<!-- BOTÕES FINAIS CENTRALIZADOS -->
+<div class="botoes-finais">
+  {% if current_user.usu_tipo == "bibliotecario" %}
+    <a href="{{ url_for('livros.adicionar_livro') }}" class="btn-adicionar">Adicionar novo livro</a>
+  {% endif %}
+  <a href="{{ url_for('main.index') }}" class="btn-voltar_inicio">Voltar</a>
+</div>
 
-<a href="{{ url_for('main.index') }}" class="btn-voltar_inicio">Voltar</a>
 {% endblock %}

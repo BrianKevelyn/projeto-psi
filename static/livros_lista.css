@@ -1,38 +1,57 @@
+/* =========================================
+   CONTAINER PRINCIPAL
+========================================= */
 .livros-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-  margin-top: 20px;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  margin-top: 30px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  justify-items: stretch;
+  align-items: stretch;
 }
 
+/* =========================================
+   CARD DO LIVRO
+========================================= */
 .livro-card {
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  width: 220px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+  border: 1px solid #ececec;
+  border-radius: 14px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
+  overflow: hidden;
+  width: 350px;
   padding: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
 .livro-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
+/* =========================================
+   INFORMAÇÕES DO LIVRO
+========================================= */
 .livro-info h3 {
-  margin: 0 0 6px 0;
-  font-size: 1.15rem;
+  margin: 0 0 8px 0;
+  font-size: 1.2rem;
   color: #222;
   text-align: center;
+  font-weight: 700;
 }
 
 .livro-info .autor {
   font-style: italic;
-  color: #666;
+  color: #6c757d;
   font-size: 0.9rem;
   margin-bottom: 10px;
   text-align: center;
@@ -46,85 +65,185 @@
   text-align: center;
 }
 
+/* Disponibilidade */
 .livro-info .disponivel,
 .livro-info .esgotado {
-  font-weight: bold;
-  margin-bottom: 12px;
-  padding: 10px ;
+  font-weight: 600;
+  margin-bottom: 14px;
   text-align: center;
+  border-radius: 8px;
+  padding: 6px 0;
+  width: 100%;
 }
 
-.livro-info .disponivel { color: #28a745; }
-.livro-info .esgotado { color: #dc3545; }
+.livro-info .disponivel {
+  background-color: rgba(40, 167, 69, 0.1);
+  color: #28a745;
+  padding: 10px;
+}
 
+.livro-info .esgotado {
+  background-color: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+/* =========================================
+   BOTÕES ADMIN (Editar / Excluir)
+========================================= */
 .btns-admin {
   display: flex;
-  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
   width: 100%;
+  margin-top: 10px;
+}
+
+.btns-admin a,
+.btns-admin form {
+  flex: 1;
+  display: flex;
+  justify-content: center;
 }
 
 .btns-admin a,
 .btns-admin button {
-  flex: 1; 
-  padding: 10px 0;
+  width: 100%;
+  max-width: 100px;
+  text-align: center;
   border: none;
   border-radius: 8px;
   font-weight: 600;
-  color: white;
-  cursor: pointer;
-  text-align: center;
+  font-size: 15px;
+  padding: 10px 0;
+  color: #fff;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.btn-comprar,
-.btn-esgotado,
+/* Editar */
+.btn-editar {
+  background-color: #fbbf24;
+  color: #000;
+}
+.btn-editar:hover {
+  background-color: #f59e0b;
+}
+
+/* Excluir */
+.btn-excluir {
+  background-color: #dc3545;
+}
+.btn-excluir:hover {
+  background-color: #b02a37;
+}
+
+/* =========================================
+   BOTÕES DE AÇÃO DO USUÁRIO
+========================================= */
+.btn-comprar {
+  background-color: #28a745;
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 100%;
+}
+.btn-comprar:hover {
+  background-color: #218838;
+}
+
+.btn-esgotado {
+  background-color: #adb5bd;
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  width: 100%;
+  cursor: not-allowed;
+}
+
+/* =========================================
+   BOTÕES FINAIS (Adicionar / Voltar)
+========================================= */
+.botoes-finais {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
 .btn-adicionar,
 .btn-voltar_inicio {
-  width: 100%;
-  padding: 10px 0;
-  border: none;
+  padding: 10px 25px;
   border-radius: 8px;
-  font-weight: 600;
-  text-decoration: none;
-  color: white;
-  cursor: pointer;
-  margin-bottom: 10px;
+  font-weight: 500;
   text-align: center;
-  transition: background-color 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s ease-in-out;
 }
 
-.btn-adicionar { margin: 30px 0 10px 0; }
-.btn-voltar_inicio { 
-  margin-bottom: 30px;
-  padding: 10px; }
+/* Adicionar */
+.btn-adicionar {
+  background-color: #27ae60;
+  color: #fff;
+  font-weight: 700;
+  padding: 12px 22px;
+  width: fit-content;
+  border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(42, 157, 143, 0.4);
+}
+.btn-adicionar:hover {
+  background-color: #219150;
+  transition: 0.3s;
+}
 
-.btn-comprar { background-color: #28a745; }
-.btn-comprar:hover { background-color: #218838; }
-
-.btn-editar { background-color: #2a9d8f; }
-.btn-editar:hover { background-color: #1b5f57; }
-
-.btn-excluir { background-color: #dc3545; }
-.btn-excluir:hover { background-color: #b02a37; }
-
-.btn-esgotado { background-color: #dc3545; cursor: not-allowed; }
-
-.btn-adicionar { 
-  background-color: #2a9d8f;
-  margin-top: 100px;
-  padding: 10px;
- }
-.btn-adicionar:hover { background-color: #1b5f57; }
-
-.btn-voltar_inicio { 
+/* Voltar */
+.btn-voltar_inicio {
   background-color: #264653;
-  padding: 10px;
-  margin-top: 50px; }
-.btn-voltar_inicio:hover { background-color: #1e374a; }
+  color: #fff;
+  font-weight: 700;
+  padding: 12px 22px;
+  width: fit-content;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 6px 14px rgba(38, 70, 83, 0.4);
+  transition: 0.3s;
+}
+.btn-voltar_inicio:hover {
+  background-color: #11202b;
+}
 
-.acoes{
-  padding: 10px;
-  margin: 2rem 0 0 1rem;
-  gap: 1rem;
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+@media (max-width: 992px) {
+  .livros-container {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .livros-container {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+
+  .btns-admin {
+    flex-direction: column;
+  }
+
+  .btn-adicionar,
+  .btn-voltar_inicio {
+    width: 90%;
+  }
 }

@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
 
-{% block title %}Página Inicial{% endblock %}
-
+{% block title %}Perfil do Usuário{% endblock %}
 
 {% block content %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='perfil.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='perfil.css') }}">
 
+<div class="page-container">
+  <h1>Meu Perfil</h1>
 
-  <h1>Perfil</h1>
-  <a href="{{ url_for('main.index') }}" class="voltar_inicio">Voltar para Início</a>
+  <div class="perfil-dados">
+    <div class="perfil-linha"><strong>Nome:</strong> {{ current_user.usu_nome }}</div>
+    <div class="perfil-linha"><strong>Matrícula:</strong> {{ current_user.usu_matricula }}</div>
+    <div class="perfil-linha"><strong>Telefone:</strong> {{ current_user.usu_telefone or 'Não informado' }}</div>
+    <div class="perfil-linha"><strong>Email:</strong> {{ current_user.usu_email or 'Não informado' }}</div>
+    <div class="perfil-linha"><strong>Tipo de Usuário:</strong> {{ current_user.usu_tipo or 'Padrão' }}</div>
+  </div>
+
+  <div class="perfil-botoes">
+    <a href="{{ url_for('main.editar_perfil') }}" class="btn-editar">Editar Perfil</a>
+    <a href="{{ url_for('main.index') }}" class="btn-voltar_inicio">Voltar ao Início</a>
+  </div>
+</div>
 {% endblock %}
