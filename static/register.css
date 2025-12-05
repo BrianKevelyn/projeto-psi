@@ -138,3 +138,89 @@
         margin: 0 10px;
       }
     }
+
+    @media (max-width: 600px) {
+      .container-register {
+        padding: 25px 15px;
+        margin: 0 10px;
+      }
+
+      h2 {
+        font-size: 1.75rem;
+        margin-bottom: 1.2rem;
+      }
+
+      form input[type="text"],
+      form input[type="password"],
+      form input[type="email"],
+      form select {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+      }
+
+      form button {
+        font-size: 1rem;
+        padding: 10px;
+      }
+
+      p.text-center {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 450px) {
+      .container-register {
+        padding: 20px 12px;
+      }
+
+      h2 {
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+      }
+
+      form input[type="text"],
+      form input[type="password"],
+      form input[type="email"],
+      form select {
+        font-size: 0.85rem;
+      }
+
+      form button {
+        font-size: 0.95rem;
+        padding: 9px;
+      }
+
+      p.text-center {
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Extra small screens */
+    @media (max-width: 320px) {
+      .container-register {
+        padding: 15px 8px;
+      }
+
+      h2 {
+        font-size: 1.4rem;
+        margin-bottom: 0.8rem;
+      }
+
+      form input[type="text"],
+      form input[type="password"],
+      form input[type="email"],
+      form select {
+        padding: 6px 8px;
+        font-size: 0.8rem;
+      }
+
+      form button {
+        font-size: 0.9rem;
+        padding: 8px;
+      }
+
+      p.text-center {
+        font-size: 0.75rem;
+      }
+    }
+    

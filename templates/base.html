@@ -33,15 +33,13 @@
       <a href="{{ url_for('livros.adicionar_livro') }}" class="nav-link {% if request.endpoint == 'livros.adicionar_livro' %}active{% endif %}">Adicionar Livro</a>
     {% endif %}
     <a href="{{ url_for('livros.lista_livros') }}" class="nav-link {% if request.endpoint == 'livros.lista_livros' %}active{% endif %}">Livros</a>
-    <a href="{{ url_for('livros.emprestimo_livro') }}" class="d-block text-white mb-2 {% if request.endpoint == 'livros.emprestimo_livro' %}active{% endif %}">Empréstimos</a>
-
-    <a href="{{ url_for('main.perfil') }}" class="d-block text-white mb-2 {% if request.endpoint == 'main.perfil' %}active{% endif %}">Perfil</a>
-    
+    <a href="{{ url_for('livros.emprestimo_livro') }}" class="nav-link {% if request.endpoint == 'livros.emprestimo_livro' %}active{% endif %}">Empréstimos</a>
+    <a href="{{ url_for('main.perfil') }}" class="nav-link {% if request.endpoint == 'main.perfil' %}active{% endif %}">Perfil</a>
     <hr class="bg-light">
     <a href="{{ url_for('auth.logout') }}" class="btn btn-outline-light mt-2">Logout</a>
   </div>
 
-  <div class="content" style="margin-left: 250px; padding: 20px;">
+  <div class="content">
     {% block content %}{% endblock %}
   </div>
 <script>
