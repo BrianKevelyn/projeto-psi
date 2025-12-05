@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Página Inicial{% endblock %}
+
+{% block content %}
+  <h1>Página Inicial</h1>
+
+  {% if current_user.usu_tipo == "bibliotecario" %}
+    <div class="alert alert-info mt-3">
+      👩‍🏫 Bem-vindo(a), bibliotecário(a) <strong>{{ current_user.usu_nome }}</strong>!  
+      Você tem acesso total ao sistema de gerenciamento da biblioteca.
+    </div>
+    <a class="btn btn-success" href="{{ url_for('livros.adicionar_livro') }}">Adicionar livro</a>
+  {% else %}
+    <div class="alert alert-secondary mt-3">
+      👤 Bem-vindo(a), <strong>{{ current_user.usu_nome }}</strong>! Ao sistema de biblioteca.
+    </div>
+  {% endif %}
+{% endblock %}
