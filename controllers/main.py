@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request
 from flask_login import login_required, current_user
 from werkzeug.security import generate_password_hash
-from app import db  # se seu app principal se chama app.py e possui db do SQLAlchemy
+from database.connection import db
 
 main_bp = Blueprint('main', __name__)
+
 
 @main_bp.route('/')
 @login_required
