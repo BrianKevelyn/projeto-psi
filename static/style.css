@@ -60,6 +60,11 @@
   transition: padding-left 0.3s ease;
 }
 
+.content .img{
+  display: flex;
+  justify-content: end;
+}
+
 
 @media (max-width: 850px) {
   .sidebar {
