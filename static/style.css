@@ -56,13 +56,22 @@
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
   padding: 40px 40px 40px 270px;
   transition: padding-left 0.3s ease;
 }
 
 .content .img{
+  position: absolute;        
+  top: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
   display: flex;
-  justify-content: end;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 
