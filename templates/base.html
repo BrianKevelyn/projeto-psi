@@ -40,9 +40,9 @@
   </div>
 
   <div class="content">
-    <div class="img">
+    <a href="{{ url_for('carrinho.ver_carrinho') }}" class="img">
       <img src="{{ url_for('static', filename='img/carrinho.png') }}" alt="carrinho" width="30">
-    </div>
+    </a>
     {% block content %}{% endblock %}
   </div>
 <script>

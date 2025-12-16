@@ -61,8 +61,15 @@
 }
 
 .content .img{
+  position: absolute;        
+  top: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
   display: flex;
-  justify-content: end;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 
