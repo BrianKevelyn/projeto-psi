@@ -52,10 +52,10 @@ def adicionar_livro():
             quantidade_int = 0
 
         try:
-            preco_float = float(preco) if preco else None
+            preco_float = float(preco) if preco else 0.0
         except ValueError:
             flash("Preço inválido.", "error")
-            preco_float = None
+            preco_float = 0.0
 
         novo_livro = Livro(
             liv_titulo=titulo,
@@ -89,7 +89,12 @@ def editar_livro(livro_id):
         livro.liv_editora = request.form["editora"]
         livro.liv_ano = request.form["ano"]
         livro.liv_genero = request.form["genero"]
-        livro.liv_preco = request.form["preco"]
+        preco = request.form.get("preco", "").strip()
+        try:
+            livro.liv_preco = float(preco) if preco else 0.0
+        except ValueError:
+            livro.liv_preco = 0.0
+            flash("Preço inválido. Salvamos como 0,00.", "error")
         livro.liv_descricao = request.form["descricao"]
         livro.liv_quantidade = request.form["quantidade"]
         db.session.commit()

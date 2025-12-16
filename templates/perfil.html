@@ -13,8 +13,17 @@
     <div class="perfil-linha"><strong>Matrícula:</strong> {{ current_user.usu_matricula }}</div>
     <div class="perfil-linha"><strong>Telefone:</strong> {{ current_user.usu_telefone or 'Não informado' }}</div>
     <div class="perfil-linha"><strong>Email:</strong> {{ current_user.usu_email or 'Não informado' }}</div>
-    <div class="perfil-linha"><strong>Tipo de Usuário:</strong> {{ current_user.usu_tipo or 'Padrão' }}</div>
+    <div class="perfil-linha">
+      <strong>Tipo de Usuário:</strong>
+      {% if current_user.usu_tipo == 'cliente' %}
+        Cliente
+      {% elif current_user.usu_tipo == 'bibliotecario' %}
+        Bibliotecário
+      {% else %}
+        Padrão
+      {% endif %}
   </div>
+</div>
 
   <div class="perfil-botoes">
     <a href="{{ url_for('main.editar_perfil') }}" class="btn-editar">Editar Perfil</a>

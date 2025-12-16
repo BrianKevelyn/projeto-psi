@@ -26,16 +26,10 @@
               <div class="livro-info">
                 <h3>{{ livro.liv_titulo }}</h3>
                 <p class="autor">Por {{ livro.liv_autor }}</p>
-                <p class="preco">
-                  {% if livro.liv_preco is not none %}
-                    R$ {{ '%.2f'|format(livro.liv_preco) }}
-                  {% else %}
-                    Preço não informado
-                  {% endif %}
-                </p>
+                <p class="preco">R$ {{ '%.2f'|format(livro.liv_preco or 0) }}</p>
 
                 {% if livro.liv_quantidade > 0 %}
-                  <p class="disponivel">Quantidade: {{ livro.liv_quantidade }}</p>
+                  <p class="disponivel">Estoque: {{ livro.liv_quantidade }}</p>
                 {% else %}
                   <p class="esgotado">Esgotado</p>
                 {% endif %}
@@ -78,13 +72,7 @@
               <div class="livro-info">
                 <h3>{{ livro.liv_titulo }}</h3>
                 <p class="autor">Por {{ livro.liv_autor }}</p>
-                <p class="preco">
-                  {% if livro.liv_preco is not none %}
-                    R$ {{ '%.2f'|format(livro.liv_preco) }}
-                  {% else %}
-                    Preço não informado
-                  {% endif %}
-                </p>
+                <p class="preco">R$ {{ '%.2f'|format(livro.liv_preco or 0) }}</p>
                 <p class="editora">Editora: {{ livro.liv_editora }}</p>
                 <p class="genero">Gênero: {{ livro.liv_genero }}</p>
               </div>
