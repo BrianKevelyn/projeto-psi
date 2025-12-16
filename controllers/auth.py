@@ -1,9 +1,30 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
 from flask_login import login_user, logout_user, login_required, current_user
 from models.usuario import Usuario
 from database.connection import db
+from flask_mail import Message
 
 auth_bp = Blueprint('auth', __name__)
+
+def enviar_email_login(usuario):
+    msg = Message(
+        subject='Novo login detectado',
+        recipients=[usuario.usu_email],
+        sender=current_app.config['MAIL_DEFAULT_SENDER']
+    )
+
+    msg.body = f"""Olá, {usuario.usu_nome}!
+
+Detectamos um novo login em sua conta.
+
+Se não foi você, entre em contato com o suporte imediatamente.
+"""
+
+    mail = current_app.extensions['mail']
+    mail.send(msg)
+
+
+
 
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -17,6 +38,7 @@ def login():
         usuario = Usuario.query.filter_by(usu_matricula=matricula).first()
         if usuario and usuario.check_senha(senha):
             login_user(usuario)
+            enviar_email_login(usuario)
             flash('Login realizado com sucesso!', 'success')  # Mensagem de sucesso no login
             return redirect(url_for('main.index'))
         else:
