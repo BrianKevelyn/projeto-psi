@@ -1,100 +1,107 @@
 {% extends 'base.html' %}
 
-{% block title %}Catálogo de Livros{% endblock %}
+{% block title %}
+  Catálogo de Livros
+{% endblock %}
 
 {% block content %}
-<h2>Gerenciar Livros</h2>
+  <h2>Gerenciar Livros</h2>
 
-<ul class="nav nav-tabs" id="livrosTabs" role="tablist">
-  <li class="nav-item">
-    <button class="nav-link active" id="catalogo-tab" data-bs-toggle="tab" data-bs-target="#catalogo" type="button" role="tab">
-      Catálogo de Livros
-    </button>
-  </li>
-  <li class="nav-item">
-    <button class="nav-link" id="meus-tab" data-bs-toggle="tab" data-bs-target="#meus" type="button" role="tab">
-      Meus Livros
-    </button>
-  </li>
-</ul>
+  <ul class="nav nav-tabs" id="livrosTabs" role="tablist">
+    <li class="nav-item">
+      <button class="nav-link active" id="catalogo-tab" data-bs-toggle="tab" data-bs-target="#catalogo" type="button" role="tab">Catálogo de Livros</button>
+    </li>
+    <li class="nav-item">
+      <button class="nav-link" id="meus-tab" data-bs-toggle="tab" data-bs-target="#meus" type="button" role="tab">Meus Livros</button>
+    </li>
+  </ul>
 
-<div class="tab-content mt-3" id="livrosTabsContent">
+  <div class="tab-content mt-3" id="livrosTabsContent">
+    <div class="tab-pane fade show active" id="catalogo" role="tabpanel">
+      {% if livros %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='livros_lista.css') }}" />
+        <div class="livros-container">
+          {% for livro in livros %}
+            <div class="livro-card">
+              <div class="livro-info">
+                <h3>{{ livro.liv_titulo }}</h3>
+                <p class="autor">Por {{ livro.liv_autor }}</p>
+                <p class="preco">
+                  {% if livro.liv_preco is not none %}
+                    R$ {{ '%.2f'|format(livro.liv_preco) }}
+                  {% else %}
+                    Preço não informado
+                  {% endif %}
+                </p>
 
-  <div class="tab-pane fade show active" id="catalogo" role="tabpanel">
-    {% if livros %}
-      <link rel="stylesheet" href="{{ url_for('static', filename='livros_lista.css') }}">
-      <div class="livros-container">
-        {% for livro in livros %}
-          <div class="livro-card">
-            <div class="livro-info">
-              <h3>{{ livro.liv_titulo }}</h3>
-              <p class="autor">Por {{ livro.liv_autor }}</p>
-              <p class="preco">R$ {{ "%.2f"|format(livro.liv_preco) }}</p>
-
-              {% if livro.liv_quantidade > 0 %}
-                <p class="disponivel">Quantidade: {{ livro.liv_quantidade }}</p>
-              {% else %}
-                <p class="esgotado">Esgotado</p>
-              {% endif %}
-
-              {% if current_user.usu_tipo == "bibliotecario" %}
-              <div class="btns-admin">
-                <a href="{{ url_for('livros.editar_livro', livro_id=livro.liv_id) }}" class="btn-editar">Editar</a>
-                <form method="POST" action="{{ url_for('livros.excluir_livro', livro_id=livro.liv_id) }}">
-                  <button type="submit" class="btn-excluir">Excluir</button>
-                </form>
-              </div>
-              {% endif %}
-
-              {% if current_user.usu_tipo != "bibliotecario" %}
                 {% if livro.liv_quantidade > 0 %}
-                  <form method="POST" action="{{ url_for('livros.comprar_livro', livro_id=livro.liv_id) }}">
-                    <button type="submit" class="btn-comprar">Comprar</button>
-                  </form>
+                  <p class="disponivel">Quantidade: {{ livro.liv_quantidade }}</p>
                 {% else %}
-                  <button class="btn-esgotado" disabled>Esgotado</button>
+                  <p class="esgotado">Esgotado</p>
                 {% endif %}
-              {% endif %}
 
+                {% if current_user.usu_tipo == 'bibliotecario' %}
+                  <div class="btns-admin">
+                    <a href="{{ url_for('livros.editar_livro', livro_id=livro.liv_id) }}" class="btn-editar">Editar</a>
+                    <form method="POST" action="{{ url_for('livros.excluir_livro', livro_id=livro.liv_id) }}">
+                      <button type="submit" class="btn-excluir">Excluir</button>
+                    </form>
+                  </div>
+                {% endif %}
+
+                {% if current_user.usu_tipo != 'bibliotecario' %}
+                  {% if livro.liv_quantidade > 0 %}
+                    <form method="POST" action="{{ url_for('livros.comprar_livro', livro_id=livro.liv_id) }}">
+                      <button type="submit" class="btn-comprar">Comprar</button>
+                    </form>
+                  {% else %}
+                    <button class="btn-esgotado" disabled>Esgotado</button>
+                  {% endif %}
+                {% endif %}
+              </div>
             </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <p>Não há livros cadastrados.</p>
-    {% endif %}
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>Não há livros cadastrados.</p>
+      {% endif %}
+    </div>
+
+    <!-- Aba Meus Livros -->
+    <div class="tab-pane fade" id="meus" role="tabpanel">
+      {% if meus_livros %}
+        <link rel="stylesheet" href="{{ url_for('static', filename='livros_lista.css') }}" />
+        <h5>Total de livros: {{ meus_livros|length }}</h5>
+        <div class="livros-container">
+          {% for livro in meus_livros %}
+            <div class="livro-card">
+              <div class="livro-info">
+                <h3>{{ livro.liv_titulo }}</h3>
+                <p class="autor">Por {{ livro.liv_autor }}</p>
+                <p class="preco">
+                  {% if livro.liv_preco is not none %}
+                    R$ {{ '%.2f'|format(livro.liv_preco) }}
+                  {% else %}
+                    Preço não informado
+                  {% endif %}
+                </p>
+                <p class="editora">Editora: {{ livro.liv_editora }}</p>
+                <p class="genero">Gênero: {{ livro.liv_genero }}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p>Você ainda não comprou ou emprestou nenhum livro.</p>
+      {% endif %}
+    </div>
   </div>
 
-  <!-- Aba Meus Livros -->
-  <div class="tab-pane fade" id="meus" role="tabpanel">
-    {% if meus_livros %}
-      <link rel="stylesheet" href="{{ url_for('static', filename='livros_lista.css') }}">
-      <h5>Total de livros: {{ meus_livros|length }}</h5>
-      <div class="livros-container">
-        {% for livro in meus_livros %}
-          <div class="livro-card">
-            <div class="livro-info">
-              <h3>{{ livro.liv_titulo }}</h3>
-              <p class="autor">Por {{ livro.liv_autor }}</p>
-              <p class="preco">R$ {{ "%.2f"|format(livro.liv_preco) }}</p>
-              <p class="editora">Editora: {{ livro.liv_editora }}</p>
-              <p class="genero">Gênero: {{ livro.liv_genero }}</p>
-            </div>
-          </div>
-        {% endfor %}
-      </div>
-    {% else %}
-      <p>Você ainda não comprou ou emprestou nenhum livro.</p>
+  <!-- BOTÕES FINAIS CENTRALIZADOS -->
+  <div class="botoes-finais">
+    {% if current_user.usu_tipo == 'bibliotecario' %}
+      <a href="{{ url_for('livros.adicionar_livro') }}" class="btn-adicionar">Adicionar novo livro</a>
     {% endif %}
+    <a href="{{ url_for('main.index') }}" class="btn-voltar_inicio">Voltar</a>
   </div>
-</div>
-
-<!-- BOTÕES FINAIS CENTRALIZADOS -->
-<div class="botoes-finais">
-  {% if current_user.usu_tipo == "bibliotecario" %}
-    <a href="{{ url_for('livros.adicionar_livro') }}" class="btn-adicionar">Adicionar novo livro</a>
-  {% endif %}
-  <a href="{{ url_for('main.index') }}" class="btn-voltar_inicio">Voltar</a>
-</div>
-
 {% endblock %}

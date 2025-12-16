@@ -1,32 +1,21 @@
-/* =========================================
-   CONTAINER PRINCIPAL
-========================================= */
 .livros-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 28px;
-  margin-top: 30px;
-  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2%;
   width: 100%;
-  box-sizing: border-box;
-  justify-items: stretch;
-  align-items: stretch;
 }
 
-/* =========================================
-   CARD DO LIVRO
-========================================= */
 .livro-card {
-  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+  background: #ffffff;
   border: 1px solid #ececec;
   border-radius: 14px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
   align-items: center;
-  position: relative;
+  margin-top: 10px;
   overflow: hidden;
-  width: 350px;
+  width: 32%;
   padding: 20px;
   height: 100%;
   box-sizing: border-box;
@@ -38,9 +27,6 @@
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
-/* =========================================
-   INFORMAÇÕES DO LIVRO
-========================================= */
 .livro-info h3 {
   margin: 0 0 8px 0;
   font-size: 1.2rem;
@@ -65,7 +51,6 @@
   text-align: center;
 }
 
-/* Disponibilidade */
 .livro-info .disponivel,
 .livro-info .esgotado {
   font-weight: 600;
@@ -87,9 +72,6 @@
   color: #dc3545;
 }
 
-/* =========================================
-   BOTÕES ADMIN (Editar / Excluir)
-========================================= */
 .btns-admin {
   display: flex;
   justify-content: center;
@@ -123,26 +105,23 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Editar */
 .btn-editar {
   background-color: #fbbf24;
   color: #000;
 }
+
 .btn-editar:hover {
   background-color: #f59e0b;
 }
 
-/* Excluir */
 .btn-excluir {
   background-color: #dc3545;
 }
+
 .btn-excluir:hover {
   background-color: #b02a37;
 }
 
-/* =========================================
-   BOTÕES DE AÇÃO DO USUÁRIO
-========================================= */
 .btn-comprar {
   background-color: #28a745;
   color: #fff;
@@ -154,6 +133,7 @@
   transition: all 0.25s ease;
   width: 100%;
 }
+
 .btn-comprar:hover {
   background-color: #218838;
 }
@@ -168,9 +148,6 @@
   cursor: not-allowed;
 }
 
-/* =========================================
-   BOTÕES FINAIS (Adicionar / Voltar)
-========================================= */
 .botoes-finais {
   display: flex;
   justify-content: center;
@@ -191,7 +168,6 @@
   transition: all 0.2s ease-in-out;
 }
 
-/* Adicionar */
 .btn-adicionar {
   background-color: #27ae60;
   color: #fff;
@@ -203,12 +179,12 @@
   text-decoration: none;
   box-shadow: 0 6px 14px rgba(42, 157, 143, 0.4);
 }
+
 .btn-adicionar:hover {
   background-color: #219150;
   transition: 0.3s;
 }
 
-/* Voltar */
 .btn-voltar_inicio {
   background-color: #264653;
   color: #fff;
@@ -220,22 +196,25 @@
   box-shadow: 0 6px 14px rgba(38, 70, 83, 0.4);
   transition: 0.3s;
 }
+
 .btn-voltar_inicio:hover {
   background-color: #11202b;
 }
 
-/* =========================================
-   RESPONSIVIDADE
-========================================= */
+
 @media (max-width: 992px) {
+  .livro-card {
+    width: 49%;
+  }
+
   .livros-container {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2%;
   }
 }
 
 @media (max-width: 600px) {
-  .livros-container {
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  .livro-card {
+    width: 100%;
   }
 
   .btns-admin {
