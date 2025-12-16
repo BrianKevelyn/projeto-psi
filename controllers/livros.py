@@ -4,6 +4,7 @@ from models.livro import Livro
 from models.emprestimo import Emprestimo
 from database.connection import db
 from datetime import datetime, date, timedelta
+from models.itemcarrinho import ItemCarrinho
 
 livros_bp = Blueprint("livros", __name__, url_prefix="/livros")
 
@@ -298,3 +299,30 @@ def listar_emprestimos():
         db.session.commit()
 
     return render_template("listar_emprestimos.html", emprestimos=emprestimos)
+
+@livros_bp.route("/adicionar_ao_carrinho/<int:livro_id>", methods=["POST"])
+@login_required
+def adicionar_ao_carrinho(livro_id):
+    livro = Livro.query.get_or_404(livro_id)
+
+    # Verifica se o livro já foi adicionado ao carrinho
+    item_existente = ItemCarrinho.query.filter_by(
+    usuario_id=current_user.usu_id,
+    nome=livro.liv_titulo
+    ).first()
+
+    if item_existente:
+        item_existente.quantidade += 1  # Se já existe, incrementa a quantidade
+    else:
+        item = ItemCarrinho(
+            usuario_id=current_user.usu_id,
+            nome=livro.liv_titulo,
+            quantidade=1,
+            preco_unitario=livro.liv_preco
+)
+        db.session.add(item)
+
+    db.session.commit()
+
+    flash(f"'{livro.liv_titulo}' foi adicionado ao seu carrinho.", "success")
+    return redirect(url_for("livros.lista_livros"))

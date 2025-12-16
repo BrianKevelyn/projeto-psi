@@ -1,0 +1,144 @@
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f0f2f5, #e6e9ef);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 85%;
+    max-width: 1100px;
+    margin: 50px auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+table th, 
+table td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+}
+
+table th {
+    background-color: #f7f7f7;
+    font-weight: 600;
+    color: #555;
+}
+
+table tr:hover {
+    background-color: #fafafa;
+}
+
+table td:first-child {
+    text-align: left;
+    font-weight: 500;
+}
+
+.total {
+    text-align: right;
+    margin-top: 25px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #222;
+}
+
+.acoes {
+    margin-top: 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.acoes a {
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.continuar {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.continuar:hover {
+    background-color: #d5d5d5;
+}
+
+.finalizar {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.finalizar:hover {
+    background-color: #218838;
+}
+
+.vazio {
+    text-align: center;
+    font-size: 20px;
+    color: #777;
+    margin: 50px 0;
+}
+
+
+.qtd-controle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-qtd {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    color: #333;
+    text-align: center;
+    line-height: 32px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-qtd:hover {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.qtd {
+    min-width: 24px;
+    font-weight: bold;
+}
+
+.btn-remover {
+    font-size: 20px;
+    color: #dc3545;
+    text-decoration: none;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.btn-remover:hover {
+    color: #b02a37;
+    transform: scale(1.2);
+}

@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}Carrinho{% endblock %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='carrinho.css') }}">
+<div class="container">
+    <h1>🛒 Meu Carrinho</h1>
+
+    {% if itens %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Preço Unitário</th>
+                    <th>Subtotal</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in itens %}
+                <tr>
+                    <td>{{ item.nome }}</td>
+                    <td class="qtd-controle">
+                        <a href="{{ url_for('carrinho.diminuir', item_id=item.id) }}" class="btn-qtd">-</a>
+                        <span class="qtd">{{ item.quantidade }}</span>
+                        <a href="{{ url_for('carrinho.aumentar', item_id=item.id) }}" class="btn-qtd">+</a>
+                    </td>
+                    <td>R$ {{ "%.2f"|format(item.preco_unitario) }}</td>
+                    <td>R$ {{ "%.2f"|format(item.subtotal) }}</td>
+                    <td>
+                        <a href="{{ url_for('carrinho.remover', item_id=item.id) }}" class="btn-remover">
+                            🗑️
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="total">
+            Total: R$ {{ "%.2f"|format(total) }}
+        </div>
+
+        <div class="acoes">
+            <a href="{{ url_for('livros.lista_livros') }}" class="continuar">
+                ← Continuar comprando
+            </a>
+
+            <a href="#" class="finalizar">
+                Finalizar pedido →
+            </a>
+        </div>
+    {% else %}
+        <div class="vazio">
+            Seu carrinho está vazio 🛍️
+        </div>
+
+        <div class="acoes" style="justify-content: center;">
+            <a href="{{ url_for('livros.lista_livros') }}" class="continuar">
+                Voltar para a loja
+            </a>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}
