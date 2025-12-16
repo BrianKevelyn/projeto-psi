@@ -4,6 +4,7 @@ from database.connection import db
 from controllers.auth import auth_bp
 from controllers.main import main_bp
 from controllers.livros import livros_bp 
+from controllers.car import carrinho_bp
 
 def create_app():
     app = Flask(__name__)
@@ -26,6 +27,7 @@ def create_app():
     app.register_blueprint(auth_bp)
     app.register_blueprint(main_bp)
     app.register_blueprint(livros_bp) 
+    app.register_blueprint(carrinho_bp)
 
     with app.app_context():
         db.create_all()
