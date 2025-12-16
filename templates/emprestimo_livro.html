@@ -33,7 +33,10 @@
           {% endfor %}
         </select>
         <br>
-        <button type="submit" class="btn btn-primary">Registrar Empréstimo</button>
+        <div class="d-flex">
+          <button type="submit" class="btn-emprestimos">Registrar Empréstimo</button>
+          <a class="btn-voltar" href="{{ url_for('main.index') }}">Voltar</a>
+        </div>
       </form>
     {% else %}
       <p>Não há livros disponíveis no momento.</p>
@@ -94,9 +97,7 @@
   {% else %}
     <p>Você não possui empréstimos no momento.</p>
   {% endif %}
+  <a class="btn-voltar" href="{{ url_for('livros.emprestimo_livro') }}">Voltar</a>
 </div>
 
-<a class="btn btn-secondary mt-3" href="{{ url_for('main.index') }}">Voltar</a>
 {% endblock %}
-
-

@@ -1,0 +1,15 @@
+.btn-adicionar {
+    background-color: #2a9d8f;
+    color: #fff;
+    font-weight: 700;
+    padding: 12px 22px;
+    width: fit-content;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.btn-adicionar:hover {
+    background-color: #20746f;
+    transition: 0.3s;
+}

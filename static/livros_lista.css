@@ -30,7 +30,7 @@
 }
 
 .livro-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-3px);
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
@@ -106,12 +106,12 @@
 }
 
 .btn-editar {
-  background-color: #fbbf24;
+  background-color: #f4a261;
   color: #000;
 }
 
 .btn-editar:hover {
-  background-color: #f59e0b;
+  background-color: #e76f51;
 }
 
 .btn-excluir {
@@ -169,7 +169,7 @@
 }
 
 .btn-adicionar {
-  background-color: #27ae60;
+  background-color: #2a9d8f;
   color: #fff;
   font-weight: 700;
   padding: 12px 22px;
@@ -177,11 +177,10 @@
   border: none;
   border-radius: 8px;
   text-decoration: none;
-  box-shadow: 0 6px 14px rgba(42, 157, 143, 0.4);
 }
 
 .btn-adicionar:hover {
-  background-color: #219150;
+  background-color: #20746f;
   transition: 0.3s;
 }
 

@@ -1,5 +1,4 @@
 .btn-emprestimos {
-  width: 100%;
   padding: 12px;
   background-color: #2a9d8f;
   border: none;
@@ -9,17 +8,34 @@
   cursor: pointer;
   text-decoration: none;
   transition: background-color 0.3s ease;
+  width: auto; /* Ajuste para se ajustar ao conteúdo */
 }
 
 .btn-voltar {
-  width: 100%;
-  padding: 12px;
-  background-color: #c02b33;
+  background-color: #264653;
+  padding: 12px 20px; /* Ajuste o padding para tornar o botão similar */
   border: none;
   color: white;
-  font-weight: 700;
   border-radius: 7px;
   cursor: pointer;
   text-decoration: none;
   transition: background-color 0.3s ease;
+  align-items: center;
+  justify-content: center;
+  width: auto; /* Ajuste para se ajustar ao conteúdo */
+}
+
+.table {
+  margin-bottom: 25px;
+}
+.btn-voltar:hover {
+  background-color: #1f3b64;
+  transition: 0.3s;
+}
+
+.d-flex {
+  display: flex;
+  flex-direction: row;
+  width: 35%;
+  justify-content: space-between;
 }

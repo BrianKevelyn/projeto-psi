@@ -64,14 +64,14 @@
 .btn-voltar {
   text-decoration: none;
   color: #fff;
-  background-color: #1f3b64;
+  background-color: #264653;
   padding: 10px 25px;
   border-radius: 12px;
   transition: 0.3s;
 }
 
 .btn-voltar:hover {
-  background-color: #102a4d;
+  background-color: #11202b;
 }
 
 .alerta {
