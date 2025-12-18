@@ -27,6 +27,24 @@ Se não foi você, entre em contato com o suporte imediatamente.
     mail = current_app.extensions['mail']
     mail.send(msg)
 
+def enviar_email_compra(livro, usuario):
+    msg = Message(
+        subject=f"Compra do livro {livro.liv_titulo}",
+        recipients=[usuario.usu_email]  # campo real do usuário
+    )
+    msg.body = f"""Olá, {usuario.usu_nome}!
+
+Vimos que comprou o livro {livro.liv_titulo}.
+
+Faça muito bom uso e que Romerito NOS passe, em nome de Jesus. 
+
+Se não foi você, entre em contato com o suporte imediatamente.
+"""
+
+    mail = current_app.extensions['mail']
+    mail.send(msg)
+
+
 @livros_bp.route("/adicionar_livro", methods=["GET", "POST"])
 @login_required
 def adicionar_livro():
@@ -165,6 +183,7 @@ def comprar_livro(livro_id):
         f"Você comprou/empréstimo do livro '{livro.liv_titulo}' foi registrado com sucesso!",
         "success",
     )
+    enviar_email_compra(livro=livro, usuario=current_user)
     return redirect(url_for("livros.lista_livros"))
 
 
