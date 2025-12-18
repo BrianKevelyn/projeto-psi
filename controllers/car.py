@@ -1,7 +1,10 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
 from models.itemcarrinho import ItemCarrinho
+from models.livro import Livro
+from models.carrinho import Carrinho
 from database.connection import db
+
 
 carrinho_bp = Blueprint("carrinho", __name__)
 
@@ -67,3 +70,39 @@ def remover(item_id):
     flash("Item removido do carrinho.", "success")
     return redirect(url_for("carrinho.ver_carrinho"))
 
+@carrinho_bp.route('/carrinho/finalizar', methods=['POST'])
+@login_required
+def finalizar_compra():
+    itens_carrinho = Carrinho.query.filter_by(
+        usu_id=current_user.usu_id
+    ).all()
+
+    if not itens_carrinho:
+        flash('Seu carrinho está vazio.', 'warning')
+        redirect(url_for('carrinho.ver_carrinho'))
+    # 1️⃣ Validar estoque
+    for item in itens_carrinho:
+        livro = Livro.query.get(item.livro_id)
+
+        if not livro:
+            flash('Livro não encontrado.', 'danger')
+            return redirect(url_for('livros.ver_carrinho'))
+
+        if livro.liv_quantidade < item.quantidade:
+            flash(
+                f'Estoque insuficiente para "{livro.liv_titulo}".',
+                'danger'
+            )
+            return redirect(url_for('livros.ver_carrinho'))
+
+    # 2️⃣ Descontar estoque e limpar carrinho
+    for item in itens_carrinho:
+        livro = Livro.query.get(item.livro_id)
+        livro.liv_quantidade -= item.quantidade
+
+        db.session.delete(item)
+
+    db.session.commit()
+
+    flash('Compra finalizada com sucesso!', 'success')
+    return redirect(url_for('livros.lista_livros'))

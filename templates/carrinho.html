@@ -49,9 +49,11 @@
                 ← Continuar comprando
             </a>
 
-            <a href="#" class="finalizar">
-                Finalizar pedido →
-            </a>
+            <form method="POST" action="{{ url_for('carrinho.finalizar_compra') }}">
+                <button type="submit" class="btn btn-success btn-lg">
+                    Finalizar compra
+                </button>
+            </form>
         </div>
     {% else %}
         <div class="vazio">
