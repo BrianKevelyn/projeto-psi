@@ -1,13 +1,31 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, current_app
 from flask_login import login_required, current_user
 from models.livro import Livro
+from models.usuario import Usuario
 from models.emprestimo import Emprestimo
 from database.connection import db
 from datetime import datetime, date, timedelta
 from models.itemcarrinho import ItemCarrinho
+from flask_mail import Message
 
 livros_bp = Blueprint("livros", __name__, url_prefix="/livros")
 
+def enviar_email_emprestimo(livro, usuario):
+    msg = Message(
+        subject=f"Empréstimo do livro {livro.liv_titulo}",
+        recipients=[usuario.usu_email]  # campo real do usuário
+    )
+    msg.body = f"""Olá, {usuario.usu_nome}!
+
+Detectamos um novo emprestimo em sua conta.
+
+O livro emprestado foi {livro.liv_titulo}
+
+Se não foi você, entre em contato com o suporte imediatamente.
+"""
+
+    mail = current_app.extensions['mail']
+    mail.send(msg)
 
 @livros_bp.route("/adicionar_livro", methods=["GET", "POST"])
 @login_required
@@ -212,6 +230,7 @@ def emprestimo_livro():
         db.session.commit()
 
         flash("Empréstimo registrado com sucesso!", "success")
+        enviar_email_emprestimo(livro=livro, usuario=current_user)
         return redirect(url_for("livros.emprestimo_livro"))
 
     # pega livros disponíveis
