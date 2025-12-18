@@ -23,6 +23,25 @@ Se não foi você, entre em contato com o suporte imediatamente.
     mail = current_app.extensions['mail']
     mail.send(msg)
 
+def enviar_email_cadastro(usuario):
+    msg = Message(
+        subject='Seu cadastro foi realizado e detectado',
+        recipients=[usuario.usu_email],
+        sender=current_app.config['MAIL_DEFAULT_SENDER']
+    )
+
+    msg.body = f"""Olá, {usuario.usu_nome}!
+
+Vimos que se registrou em nosso sistema.
+
+Desde já, damos as boas vindas a você e que seja muito bom proveito!
+
+Se não foi você que realizou o cadastro, entre em contato com o suporte imediatamente.
+"""
+
+    mail = current_app.extensions['mail']
+    mail.send(msg)
+
 
 
 
@@ -88,6 +107,7 @@ def register():
         db.session.commit()
 
         flash('Usuário criado com sucesso. Faça login.', 'success')
+        enviar_email_cadastro(novo_usuario)
         return redirect(url_for('auth.login'))
 
     return render_template('register.html')
